@@ -10,6 +10,7 @@ function irParaConsulta() {
 
 function logout() {
     if (confirm('Deseja sair do sistema?')) {
+        localStorage.removeItem('usuarioLogado');
         usuarioLogado = null;
         renderLogin();
     }
