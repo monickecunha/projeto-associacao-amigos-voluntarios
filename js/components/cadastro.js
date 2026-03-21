@@ -1,180 +1,203 @@
-function renderCadastro() {
-    paginaAtual = 'cadastro';
-    app.innerHTML = `
-        <div class="dashboard-layout">
-            <div class="sidebar">
-                <div class="sidebar-header">
-                    <h2>🤝 ONG</h2>
-                    <p>Sistema de Voluntários</p>
+function getCadastroTemplate() {
+    return `
+        <div class="container py-5">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white p-3">
+                    <h3 class="mb-0">Cadastro de Voluntário</h3>
                 </div>
-                <ul class="sidebar-menu">
-                    <li><a onclick="irParaCadastro()" class="menu-item active">📝 Cadastrar Voluntário</a></li>
-                    <li><a onclick="irParaConsulta()" class="menu-item">🔍 Consultar Voluntários</a></li>
-                </ul>
-                <button class="logout-btn" onclick="logout()">Sair</button>
-            </div>
-            <div class="main-content">
-                <div class="page-header">
-                    <h1>Cadastrar Novo Voluntário</h1>
-                    <p>Preencha o formulário abaixo com os dados do novo voluntário</p>
-                </div>
-                <div class="form-container">
+                <div class="card-body p-4">
                     <form id="formCadastro">
-                        <div class="form-row">
-                            <div class="form-group-full">
-                                <label for="nome">Nome *</label>
-                                <input type="text" id="nome" name="nome" required>
+                        <h5 class="text-primary border-bottom pb-2 mb-3">Dados Pessoais</h5>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Nome Completo *</label>
+                                <input type="text" id="nome" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Telefone *</label>
+                                <input type="tel" id="telefone" class="form-control" placeholder="(00) 00000-0000" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Rede Social (@)</label>
+                                <input type="text" id="redeSocial" class="form-control" placeholder="@usuario">
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group-full">
-                                <label for="telefone">Telefone *</label>
-                                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                        <h5 class="text-primary border-bottom pb-2 mt-4 mb-3">Endereço</h5>
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <label class="form-label fw-bold">CEP</label>
+                                <input type="text" id="cep" class="form-control">
                             </div>
-                            <div class="form-group-full">
-                                <label for="redeSocial">Rede Social (@) *</label>
-                                <input type="text" id="redeSocial" name="redeSocial" placeholder="@seu_usuario" required>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Rua</label>
+                                <input type="text" id="rua" class="form-control">
                             </div>
+                            <div class="col-md-2">
+                                <label class="form-label fw-bold">Número</label>
+                                <input type="text" id="numero" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Complemento</label>
+                                <input type="text" id="complemento" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Bairro</label>
+                                <input type="text" id="bairro" class="form-control">
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Cidade</label>
+                                <input type="text" id="cidade" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">UF</label>
+                                <input type="text" id="uf" class="form-control">
+                            </div>
+
                         </div>
 
-                        <div class="form-row full">
-                            <div class="form-group-full">
-                                <label for="endereco">Endereço *</label>
-                                <input type="text" id="endereco" name="endereco" placeholder="Rua, número - Cidade, Estado" required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group-full">
-                                <label for="areaAtuacao">Área de Atuação *</label>
-                                <select id="areaAtuacao" name="areaAtuacao" required>
-                                    <option value="">Selecione uma área</option>
-                                    <option value="Logística">Logística</option>
-                                    <option value="Saúde">Saúde</option>
-                                    <option value="Construção">Construção</option>
-                                    <option value="Saúde Mental">Saúde Mental</option>
-                                    <option value="Manutenção">Manutenção</option>
-                                    <option value="Comunicação">Comunicação</option>
-                                    <option value="Educação">Educação</option>
-                                    <option value="Alimentação">Alimentação</option>
+                        <h5 class="text-primary border-bottom pb-2 mt-4 mb-3">Perfil Profissional</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Escolaridade</label>
+                                <select id="escolaridade" class="form-select">
+                                    <option value="">Selecione...</option>
+                                    <option value="Fundamental">Ensino Fundamental incompleto</option>
+                                    <option value="Fundamental">Ensino Fundamental</option>
+                                    <option value="Medio">Ensino Médio incompleto</option>
+                                    <option value="Medio">Ensino Médio</option>
+                                    <option value="Superior">Ensino Superior incompleto</option>
+                                    <option value="Superior">Ensino Superior</option>
                                 </select>
                             </div>
-                            <div class="form-group-full">
-                                <label for="areaFormacao">Grau de Formação *</label>
-                                <select id="areaFormacao" name="areaFormacao" required>
-                                    <option value="">Selecione uma opção</option>
-                                    <option value="Ensino Fundamental">Ensino Fundamental</option>
-                                    <option value="Ensino Médio">Ensino Médio</option>
-                                    <option value="Técnico">Técnico</option>
-                                    <option value="Graduação">Graduação</option>
-                                    <option value="Pós-Graduação">Pós-Graduação</option>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Formação</label>
+                                <select id="formacao" class="form-select">
+                                    <option value="">Nenhuma</option>
+                                    <option value="Dentista">Dentista</option>
+                                    <option value="Psicólogo">Psicólogo</option>
+                                    <option value="Médico">Médico</option>
+                                    <option value="Arquiteto">Arquiteto</option>
+                                    <option value="Eletricista">Eletricista</option>
+                                    <option value="Palestrante">Palestrante</option>
+                                    <option value="Outro">Outro (especificar)</option>
                                 </select>
                             </div>
+                            <div class="col-md-4 d-none" id="divFormacaoOutro">
+                                <label class="form-label fw-bold">Qual formação?</label>
+                                <input type="text" id="formacaoOutro" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Área de Atuação na ONG *</label>
+                                <input type="text" id="areaAtuacao" class="form-control" placeholder="Ex: Recreação, Administrativo..." required>
+                            </div>
                         </div>
 
-                        <div class="form-row full">
-                            <div class="form-group-full">
-                                <label for="horarioDisponivel">Horário Disponível *</label>
-                                <input type="text" id="horarioDisponivel" name="horarioDisponivel" placeholder="Ex: Segundas e quartas à noite, Fins de semana, Eventos pontuais, etc" required>
-                            </div>
-                            <div class="form-group-full">
-                                <label for="tipo">Tipo de Voluntário *</label>
-                                <select id="tipo" name="tipo" required>
-                                    <option value="">Selecione um tipo</option>
-                                    <option value="Pontual">Pontual (eventos)</option>
-                                    <option value="Sistemático">Sistemático (semanal ou mensal)</option>
+                        <h5 class="text-primary border-bottom pb-2 mt-4 mb-3">Disponibilidade e Preferências</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Tipo de Voluntário *</label>
+                                <select id="tipoVoluntario" class="form-select" required>
+                                    <option value="Pontual">Pontual (Eventos)</option>
+                                    <option value="Sistematico">Sistemático (Semanal/Mensal)</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="form-row full">
-                            <div class="form-group-full">
-                                <label>Tem experiência em voluntariado? *</label>
-                                <div class="checkbox-group">
-                                    <div class="checkbox-item">
-                                        <input type="radio" id="expSim" name="experienciaVoluntariado" value="sim" required>
-                                        <label for="expSim">Sim</label>
-                                    </div>
-                                    <div class="checkbox-item">
-                                        <input type="radio" id="expNao" name="experienciaVoluntariado" value="nao" required>
-                                        <label for="expNao">Não</label>
-                                    </div>
-                                </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Horário Disponível</label>
+                                <input type="text" id="horario" class="form-control" placeholder="Ex: Sábados de manhã">
                             </div>
-                        </div>
-
-                        <div class="form-row full" id="localExperienciaDiv" style="display: none;">
-                            <div class="form-group-full">
-                                <label for="localExperiencia">Se sim, onde?</label>
-                                <input type="text" id="localExperiencia" name="localExperiencia" placeholder="Organização ou projeto">
-                            </div>
-                        </div>
-
-                        <div class="form-row full" id="formacaoSuperiorDiv" style="display: none;">
-                            <div class="form-group-full">
-                                <label for="formacaoSuperior">Qual é sua formação superior?</label>
-                                <input type="text" id="formacaoSuperior" name="formacaoSuperior" placeholder="Ex: Enfermagem, Psicologia, Engenharia Civil, etc">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group-full">
-                                <label for="publicoPreferencia">Público de Preferência *</label>
-                                <select id="publicoPreferencia" name="publicoPreferencia" required>
-                                    <option value="">Selecione um público</option>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Público de Preferência</label>
+                                <select id="publico" class="form-select">
+                                    <option value="">Nenhuma</option>
                                     <option value="Crianças">Crianças</option>
                                     <option value="Adolescentes">Adolescentes</option>
-                                    <option value="Adultos">Adultos</option>
                                     <option value="Idosos">Idosos</option>
-                                    <option value="Famílias">Famílias</option>
-                                    <option value="Comunidades">Comunidades</option>
-                                    <option value="Todos os públicos">Todos os públicos</option>
+                                    <option value="Todos">Todos</option>
                                 </select>
                             </div>
-                            <div class="form-group-full">
-                                <label for="hobby">Seu Hobby / Interesse *</label>
-                                <input type="text" id="hobby" name="hobby" placeholder="Ex: Futebol, Leitura, etc" required>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Possui experiência em voluntariado?</label>
+                                <select id="temExperiencia" class="form-select">
+                                    <option value="nao">Não</option>
+                                    <option value="sim">Sim</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 d-none" id="divOndeExperiencia">
+                                <label class="form-label fw-bold">Onde?</label>
+                                <input type="text" id="ondeExperiencia" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Seu Hobby</label>
+                                <input type="text" id="hobby" class="form-control">
                             </div>
                         </div>
 
-                        <div class="form-row full">
-                            <div class="form-group-full">
-                                <label for="profissao">Profissão (opcional)</label>
-                                <input type="text" id="profissao" name="profissao" placeholder="Ex: Dentista, Psicólogo, Médico, Eletricista, etc">
-                            </div>
-                        </div>
-
-                        <div class="form-buttons">
-                            <button type="submit" class="btn btn-primary">💾 Salvar Voluntário</button>
-                            <button type="reset" class="btn btn-secondary">🔄 Limpar Formulário</button>
+                        <div class="mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Salvar Cadastro</button>
+                            <button type="button" class="btn btn-light btn-lg px-4 ms-2 btn-cancelar">Cancelar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     `;
-
-    // Event listeners
-    document.getElementById('formCadastro').addEventListener('submit', salvarVoluntario);
-    
-    document.querySelectorAll('input[name="experienciaVoluntariado"]').forEach(radio => {
-        radio.addEventListener('change', function() {
-            const div = document.getElementById('localExperienciaDiv');
-            if (this.value === 'sim') {
-                div.style.display = 'grid';
-            } else {
-                div.style.display = 'none';
-            }
-        });
+}
+function configurarEventosCadastro() {
+    $('#temExperiencia').on('change', function() {
+        const temExperiencia = $(this).val() === 'sim';
+        $('#divOndeExperiencia').toggleClass('d-none', !temExperiencia);
     });
 
-    document.getElementById('areaFormacao').addEventListener('change', function() {
-        const div = document.getElementById('formacaoSuperiorDiv');
-        if (this.value === 'Graduação' || this.value === 'Pós-Graduação') {
-            div.style.display = 'grid';
-        } else {
-            div.style.display = 'none';
+    $('#formacao').on('change', function() {
+        const mostrarOutro = $(this).val() === 'Outro';
+        $('#divFormacaoOutro').toggleClass('d-none', !mostrarOutro);
+    });
+}
+
+function salvarVoluntario(e) {
+    e.preventDefault();
+
+    const novoVoluntario = {
+        id: voluntarios.length + 1,
+        nome: $('#nome').val(),
+        telefone: $('#telefone').val(),
+        redeSocial: $('#redeSocial').val(),
+        areaAtuacao: $('#areaAtuacao').val(),
+        cep: $('#cep').val(),
+        rua: $('#rua').val(),
+        numero: $('#numero').val(),
+        complemento: $('#complemento').val(),
+        bairro: $('#bairro').val(),
+        cidade: $('#cidade').val(),
+        uf: $('#uf').val(),
+        escolaridade: $('#escolaridade').val(),
+        formacao: $('#formacao').val() === 'Outro' ? $('#formacaoOutro').val() : $('#formacao').val(),
+        tipoVoluntario: $('#tipoVoluntario').val(),
+        horario: $('#horario').val(),
+        publico: $('#publico').val(),
+        temExperiencia: $('#temExperiencia').val() === 'sim',
+        ondeExperiencia: $('#ondeExperiencia').val(),
+        hobby: $('#hobby').val()    
+    };
+
+    voluntarios.push(novoVoluntario);
+
+    localStorage.setItem('listaVoluntarios', JSON.stringify(voluntarios));
+    
+    alert('Voluntário cadastrado com sucesso!');
+    renderDashboard();
+}
+
+function renderCadastro() {
+    paginaAtual = 'cadastro';
+    $('#app').html(getCadastroTemplate());
+    configurarEventosCadastro();
+    $('#formCadastro').on('submit', salvarVoluntario);
+
+    $('.btn-cancelar').on('click', function() {
+        if(confirm('Deseja descartar as alterações?')) {
+            renderDashboard();
         }
     });
 }

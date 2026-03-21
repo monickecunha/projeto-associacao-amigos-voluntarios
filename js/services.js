@@ -6,48 +6,6 @@ function limparFiltros() {
 }
 
 
-function salvarVoluntario(e) {
-    e.preventDefault();
-
-    const nome = document.getElementById('nome').value;
-    const telefone = document.getElementById('telefone').value;
-    const endereco = document.getElementById('endereco').value;
-    const redeSocial = document.getElementById('redeSocial').value;
-    const areaAtuacao = document.getElementById('areaAtuacao').value;
-    const areaFormacao = document.getElementById('areaFormacao').value;
-    const formacaoSuperior = document.getElementById('formacaoSuperior').value || null;
-    const experienciaVoluntariado = document.querySelector('input[name="experienciaVoluntariado"]:checked').value === 'sim';
-    const localExperiencia = document.getElementById('localExperiencia').value;
-    const horarioDisponivel = document.getElementById('horarioDisponivel').value;
-    const tipo = document.getElementById('tipo').value;
-    const publicoPreferencia = document.getElementById('publicoPreferencia').value;
-    const hobby = document.getElementById('hobby').value;
-    const profissao = document.getElementById('profissao').value || null;
-
-    const novoVoluntario = {
-        id: voluntarios.length + 1,
-        nome,
-        telefone,
-        endereco,
-        redeSocial,
-        areaAtuacao,
-        areaFormacao,
-        formacaoSuperior,
-        experienciaVoluntariado,
-        localExperiencia,
-        horarioDisponivel,
-        tipo,
-        publicoPreferencia,
-        hobby,
-        profissao
-    };
-
-    voluntarios.push(novoVoluntario);
-    alert('Voluntário cadastrado com sucesso!');
-    document.getElementById('formCadastro').reset();
-    document.getElementById('localExperienciaDiv').style.display = 'none';
-}
-
 function verDetalhes(id) {
     const voluntario = voluntarios.find(v => v.id === id);
     if (!voluntario) return;

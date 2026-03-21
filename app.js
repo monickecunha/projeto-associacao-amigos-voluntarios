@@ -8,6 +8,10 @@ function irParaConsulta() {
     renderConsulta();
 }
 
+function irParaCadastro() {
+    renderCadastro();
+}
+
 function logout() {
     if (confirm('Deseja sair do sistema?')) {
         localStorage.removeItem('usuarioLogado');
@@ -16,8 +20,18 @@ function logout() {
     }
 }
 
+function carregarDados() {
+    const salvos = localStorage.getItem('listaVoluntarios');
+    if (salvos) {
+        voluntarios = JSON.parse(salvos);
+    } else {
+        voluntarios = JSON.parse(JSON.stringify(VOLUNTARIOS_INICIAIS));
+    }
+}
+
 function inicializar() {
-    console.log('Iniciando aplicação...');
+
+    carregarDados();
 
     const usuarioSalvo = localStorage.getItem('usuarioLogado');
 
