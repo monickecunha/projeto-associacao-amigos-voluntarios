@@ -36,9 +36,7 @@ function inicializar() {
     const usuarioSalvo = getItem('usuarioLogado');
 
     if (usuarioSalvo) {
-
         usuarioLogado = usuarioSalvo;
-        voluntarios = JSON.parse(JSON.stringify(VOLUNTARIOS_INICIAIS));
         renderDashboard();
     } else {
         renderLogin();
