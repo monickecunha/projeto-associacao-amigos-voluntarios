@@ -48,7 +48,7 @@ function handleLogin(e) {
   if (usuario === "admin" && senha === "123456") {
     usuarioLogado = usuario;
 
-    localStorage.setItem("usuarioLogado", usuario);
+    setItem("usuarioLogado", usuario);
 
     voluntarios = JSON.parse(JSON.stringify(VOLUNTARIOS_INICIAIS));
     renderDashboard();

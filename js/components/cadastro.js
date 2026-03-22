@@ -183,7 +183,7 @@ function salvarVoluntario(e) {
 
     voluntarios.push(novoVoluntario);
 
-    localStorage.setItem('listaVoluntarios', JSON.stringify(voluntarios));
+    setItem('listaVoluntarios', JSON.stringify(voluntarios));
     
     alert('Voluntário cadastrado com sucesso!');
     renderDashboard();

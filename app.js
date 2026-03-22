@@ -14,14 +14,14 @@ function irParaCadastro() {
 
 function logout() {
     if (confirm('Deseja sair do sistema?')) {
-        localStorage.removeItem('usuarioLogado');
+        clear();
         usuarioLogado = null;
         renderLogin();
     }
 }
 
 function carregarDados() {
-    const salvos = localStorage.getItem('listaVoluntarios');
+    const salvos = getItem('listaVoluntarios');
     if (salvos) {
         voluntarios = JSON.parse(salvos);
     } else {
@@ -33,10 +33,10 @@ function inicializar() {
 
     carregarDados();
 
-    const usuarioSalvo = localStorage.getItem('usuarioLogado');
+    const usuarioSalvo = getItem('usuarioLogado');
 
     if (usuarioSalvo) {
-        
+
         usuarioLogado = usuarioSalvo;
         voluntarios = JSON.parse(JSON.stringify(VOLUNTARIOS_INICIAIS));
         renderDashboard();
