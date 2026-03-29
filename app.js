@@ -4,6 +4,10 @@ function irParaLogin() {
     renderLogin(); 
 }
 
+function irParaDashboard() {
+    renderDashboard();
+}
+
 function irParaConsulta() {
     renderConsulta();
 }
@@ -44,8 +48,5 @@ function inicializar() {
 }
 
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', inicializar);
-} else {
-    inicializar();
-}
+$(document).ready(inicializar);
+
