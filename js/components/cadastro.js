@@ -156,7 +156,7 @@ function getCadastroTemplate() {
 
                 <footer class="mt-5 pt-3 border-top text-center text-muted small">
                     Associação Amigos Voluntários &mdash; Sistema de Gestão de Voluntários<br>
-                    <span class="text-muted">Desenvolvido por: <strong>Monicke Oliveira da Cunha, Bruno Rigo Ghiggi, Bernardo Davi Pandolfo e Lucas Cutinaz</strong></span>
+                    <span class="text-muted">Desenvolvido por: <strong>Monicke Oliveira da Cunha, Bruno Rigo Ghiggi, Bernardo Davi Pandolfo e Lucas Curtinaz</strong></span>
                 </footer>
             </div>
         </div>
